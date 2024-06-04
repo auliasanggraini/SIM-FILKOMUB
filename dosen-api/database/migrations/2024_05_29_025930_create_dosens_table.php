@@ -10,9 +10,14 @@ class CreateDosensTable extends Migration
     {
         Schema::create('dosens', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('department');
+            $table->string('nip')->unique();
+            $table->string('nama_dosen');
+            $table->enum('jenis_kelamin', ['L', 'P']);
+            $table->date('tanggal_lahir');
+            $table->string('fakultas');
+            $table->string('departemen');
+            $table->unsignedBigInteger('mata_kuliah_id')->nullable();
+            $table->foreign('mata_kuliah_id')->references('id')->on('mata_kuliahs')->onDelete('set null');
             $table->timestamps();
         });
     }

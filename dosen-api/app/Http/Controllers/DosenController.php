@@ -9,7 +9,7 @@ class DosenController extends Controller
 {
     public function getListDataDosen()
     {
-        return response()->json(Dosen::all());
+        return response()->json(Dosen::with('mataKuliah')->get());
     }
 
     public function createDataDosen(Request $request)
@@ -20,7 +20,7 @@ class DosenController extends Controller
 
     public function getDetailDataDosen($id)
     {
-        $dosen = Dosen::find($id);
+        $dosen = Dosen::with('mataKuliah')->find($id);
         if (is_null($dosen)) {
             return response()->json(['message' => 'Dosen not found'], 404);
         }
